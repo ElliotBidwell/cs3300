@@ -1,6 +1,7 @@
 # Matthew Bidwell's Project Portfolio
 
 Link to access the heroku app: https://fierce-ridge-55074.herokuapp.com/
+Link to locally ran docker image: http://localhost/?folder=/root
 
 # README Template
 

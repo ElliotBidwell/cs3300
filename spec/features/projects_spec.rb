@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.feature "Projects", type: :feature do
   context "Create new project" do
     before(:each) do
+      testUser = FactoryBot.create(:user)
+      sign_in testUser
       visit new_project_path
       within("form") do
         fill_in "Title", with: "Test title"
@@ -24,6 +26,8 @@ RSpec.feature "Projects", type: :feature do
   context "Update project" do
     let(:project) { Project.create(title: "Test title", description: "Test content") }
     before(:each) do
+      testUser = FactoryBot.create(:user)
+      sign_in testUser
       visit edit_project_path(project)
     end
 
@@ -47,6 +51,8 @@ RSpec.feature "Projects", type: :feature do
   context "Remove existing project" do
     let!(:project) { Project.create(title: "Test title", description: "Test content") }
     scenario "remove project" do
+      testUser = FactoryBot.create(:user)
+      sign_in testUser
       visit projects_path
       click_link "Show this project"
       click_button "Destroy this project"
@@ -54,4 +60,5 @@ RSpec.feature "Projects", type: :feature do
       expect(Project.count).to eq(0)
     end
   end
+
 end

@@ -1,6 +1,11 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
 
+  # Maybe add before action for user_signed_in?
+
+  # Authenticate user before allowing CRUD functionality
+  before_action :authenticate_user!, only: %i[ create edit update destroy ]
+
   # GET /projects or /projects.json
   def index
     @projects = Project.all
@@ -67,4 +72,12 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :description)
     end
+
+  #protected
+  
+  #  def configure_permitted_parameters
+  #    devise_parameter_sanitizer.permit(:sign_up) do |user_params|
+  #      user_params.permit({ roles: [] }, :email, :password, :password_confirmation)
+  #    end
+  #  end
 end

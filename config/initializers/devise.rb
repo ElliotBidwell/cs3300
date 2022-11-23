@@ -24,6 +24,7 @@ class TurboFailureApp < Devise::FailureApp
   end
 end
 
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -33,6 +34,26 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'b1afcf05c05ddefc3c29b09e6043ecad4061792b7fda7984e51d5cdd408025a3cf64ba6c8cc5f443b2a114c053b12b76777142b7e26ad0c6bf6912de1262b06b'
+
+   # ==> Controller configuration
+  # Configure the parent class to the devise controllers.
+  config.parent_controller = 'TurboDeviseController'
+  
+  # ...
+
+  # ==> Navigation configuration
+  # ...
+  config.navigational_formats = ['*/*', :html, :turbo_stream]
+
+  # ...
+
+  # ==> Warden configuration
+  # ...
+  config.warden do |manager|
+    manager.failure_app = TurboFailureApp
+  #   manager.intercept_401 = false
+  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
+  end
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.

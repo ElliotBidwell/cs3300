@@ -21,6 +21,12 @@ RSpec.feature "Projects", type: :feature do
       click_button "Create Project"
       expect(page).to have_content("Description can't be blank")
     end
+    
+    scenario "Create and check if at show page" do
+      fill_in "Description", with: "Test description"
+      click_button "Create Project"
+      expect(page).to have_content("Edit this project")
+    end
   end
 
   context "Update project" do

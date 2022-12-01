@@ -6,9 +6,10 @@ RSpec.feature "Projects", type: :feature do
       testUser = FactoryBot.create(:user)
       sign_in testUser
       visit new_project_path
-      within("form") do
-        fill_in "Title", with: "Test title"
-      end
+      find_field("project[title]").set('Test title')
+      # within("form", match: :prefer_exact) do
+      #   fill_in "title", with: "Test title"
+      # end
     end
 
     scenario "Create with valid description" do
@@ -38,17 +39,13 @@ RSpec.feature "Projects", type: :feature do
     end
 
     scenario "Edit with valid description" do 
-      within("form") do
-        fill_in "Description", with: "New description content"
-      end
+      find_field("project[description]").set('Test description')
       click_button "Update Project"
       expect(page).to have_content("Project was successfully updated")
     end
 
     scenario "Edit with empty description" do
-      within("form") do
-        fill_in "Description", with: ""
-      end
+      find_field("project[description]").set('')
       click_button "Update Project"
       expect(page).to have_content("Description can't be blank")
     end
@@ -61,9 +58,16 @@ RSpec.feature "Projects", type: :feature do
       sign_in testUser
       visit projects_path
       click_link "Show this project"
-      click_button "Destroy this project"
+      click_link "Destroy this project"
       expect(page).to have_content("Project was successfully destroyed")
       expect(Project.count).to eq(0)
+    end
+  end
+
+  context "Visit pages" do
+    scenario "Check rendering of form on new project page" do
+      visit new_project_path
+      expect(page).to have_content("New project")
     end
   end
 

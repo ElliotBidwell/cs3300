@@ -1,10 +1,12 @@
-<h1>Editing project</h1>
+<div class="container my-5">
+  <h1>Editing project</h1>
 
-<%= render "form", project: @project %>
+  <%= render "form", project: @project %>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Show this project", @project %> |
-  <%= link_to "Back to projects", projects_path %>
+  <div class="btn-group">
+    <%= link_to "Show this project", @project, class:"btn btn-sm btn-outline-secondary"  %>
+    <%= link_to "Back to projects", projects_path, class:"btn btn-sm btn-outline-secondary" %>
+  </div>
 </div>
